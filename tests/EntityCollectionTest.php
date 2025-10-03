@@ -6,7 +6,7 @@ namespace LazyLib\Tests;
 
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\MySQL57Platform;
 use Doctrine\DBAL\Result;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -24,7 +24,7 @@ class EntityCollectionTest extends TestCase
     {
         parent::setUp();
 
-        $platform = $this->createMock(MySQLPlatform::class);
+        $platform = $this->createMock(MySQL57Platform::class);
         $platform->method('supportsIdentityColumns')
             ->willReturn(true)
         ;
