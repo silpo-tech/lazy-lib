@@ -19,7 +19,6 @@
       "LazyLib\\Tests\\": "tests/"
     }
   },
-  "minimum-stability": "rc",
   "require-dev": {
     "phpunit/phpunit": "^12.0",
     "phpstan/phpstan": "^2.0",
