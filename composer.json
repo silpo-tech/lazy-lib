@@ -1,0 +1,39 @@
+{
+  "name": "silpo-tech/lazy-lib",
+  "type": "library",
+  "description": "Lazy load collections",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.1",
+    "silpo-tech/paginator-bundle": "^2.0",
+    "doctrine/collections": "^1.6",
+    "doctrine/orm": "^2.20"
+  },
+  "autoload": {
+    "psr-4": {
+      "LazyLib\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "LazyLib\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "rc",
+  "require-dev": {
+    "phpunit/phpunit": "^12.0",
+    "phpstan/phpstan": "^2.0",
+    "friendsofphp/php-cs-fixer": "^3.0"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "scripts": {
+    "test:coverage": {
+      "command": "APP_ENV=test php -d extension=pcov.so -d pcov.enabled=1 bin/phpunit --colors=never --coverage-clover reports/coverage/clover.xml --log-junit reports/junit.xml"
+    },
+    "test:run": [
+      "APP_ENV=test php bin/phpunit --color=always"
+    ]
+  }
+}
