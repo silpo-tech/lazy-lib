@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 class EntityCollectionTest extends TestCase
 {
-    protected EntityManagerMock|null $entityManagerMock = null;
+    protected ?EntityManagerMock $entityManagerMock = null;
 
     protected function setUp(): void
     {
@@ -143,7 +143,7 @@ class EntityCollectionTest extends TestCase
     {
         $qb = new QueryBuilder($this->entityManagerMock);
         $qb->add('select', 'p')
-            ->add('from', Product::class . ' p');
+            ->add('from', Product::class.' p');
 
         return $qb;
     }

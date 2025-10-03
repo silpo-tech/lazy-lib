@@ -10,16 +10,15 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\CountWalker;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Exception;
 use PaginatorBundle\Paginator\PaginatableInterface;
 
 class EntityCollection extends AbstractLazyCollection implements PaginatableInterface
 {
-    private Paginator|null $paginator = null;
-    private Paginator|null $countPaginator = null;
+    private ?Paginator $paginator = null;
+    private ?Paginator $countPaginator = null;
 
     private bool $readOnly = false;
-    private bool|null $forcePartialLoad = null;
+    private ?bool $forcePartialLoad = null;
     private bool $useDistinct = true;
     private bool $useOutputWalkers = true;
     private bool $fetchJoinCollection = true;
@@ -116,7 +115,7 @@ class EntityCollection extends AbstractLazyCollection implements PaginatableInte
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     protected function doInitialize(): void
     {

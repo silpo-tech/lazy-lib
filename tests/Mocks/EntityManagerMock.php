@@ -18,19 +18,19 @@ use Doctrine\ORM\UnitOfWork;
  */
 class EntityManagerMock extends EntityManagerDecorator
 {
-    private UnitOfWork|null $_uowMock = null;
-    private ProxyFactory|null $_proxyFactoryMock = null;
+    private ?UnitOfWork $_uowMock = null;
+    private ?ProxyFactory $_proxyFactoryMock = null;
 
     /**
      * @throws MissingMappingDriverImplementation
      */
     public function __construct(
         Connection $conn,
-        Configuration|null $config = null,
+        ?Configuration $config = null,
     ) {
-        if ($config === null) {
+        if (null === $config) {
             $config = new Configuration();
-            $config->setProxyDir(__DIR__ . '/Proxies');
+            $config->setProxyDir(__DIR__.'/Proxies');
             $config->setProxyNamespace('Doctrine\Tests\Proxies');
             $config->setMetadataDriverImpl(new AttributeDriver([]));
         }
