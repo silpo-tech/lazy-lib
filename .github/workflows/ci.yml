@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['8.3', '8.4', '8.5']
+        php-version: ['8.4', '8.5']
         dependency-version: [prefer-stable]
 
     name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
@@ -48,11 +48,11 @@ jobs:
       run: composer test:run
 
     - name: Run tests with coverage
-      if: matrix.php-version == '8.3' && matrix.dependency-version == 'prefer-stable'
+      if: matrix.php-version == '8.4' && matrix.dependency-version == 'prefer-stable'
       run: composer test:coverage
 
     - name: Upload coverage reports to Codecov
-      if: matrix.php-version == '8.3' && matrix.dependency-version == 'prefer-stable'
+      if: matrix.php-version == '8.4' && matrix.dependency-version == 'prefer-stable'
       uses: codecov/codecov-action@v4
       with:
         file: ./reports/coverage/clover.xml
@@ -72,7 +72,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.3'
+        php-version: '8.4'
         extensions: json, mbstring, xml
         tools: phpstan
 
@@ -81,9 +81,9 @@ jobs:
       uses: actions/cache@v3
       with:
         path: vendor
-        key: ${{ runner.os }}-php-8.3-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-8.4-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-php-8.3-
+          ${{ runner.os }}-php-8.4-
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-interaction
@@ -101,7 +101,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.3'
+        php-version: '8.4'
         extensions: json, mbstring, xml
         tools: php-cs-fixer
 
@@ -110,9 +110,9 @@ jobs:
       uses: actions/cache@v3
       with:
         path: vendor
-        key: ${{ runner.os }}-php-8.3-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-8.4-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-php-8.3-
+          ${{ runner.os }}-php-8.4-
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-interaction
