@@ -26,7 +26,7 @@ class EntityCollectionTest extends TestCase
 
         $platform = new MySQLPlatform();
 
-        $connection = $this->createMock(Connection::class);
+        $connection = $this->createStub(Connection::class);
         $connection->method('getDatabasePlatform')
             ->willReturn($platform)
         ;
@@ -36,7 +36,7 @@ class EntityCollectionTest extends TestCase
         ;
 
         $connection->method('executeQuery')
-            ->willReturn($this->createMock(Result::class))
+            ->willReturn($this->createStub(Result::class))
         ;
 
         $connection->method('getParams')
