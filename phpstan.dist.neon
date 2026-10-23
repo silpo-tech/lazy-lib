@@ -3,3 +3,5 @@ parameters:
     paths:
         - src
         - tests
+    stubFiles:
+        - phpstan-stubs/AbstractLazyCollection.stub.php
