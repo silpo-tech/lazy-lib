@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LazyLib\Tests\Mocks;
 
+use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Decorator\EntityManagerDecorator;
@@ -27,15 +28,22 @@ class EntityManagerMock extends EntityManagerDecorator
     public function __construct(
         Connection $conn,
         ?Configuration $config = null,
+        ?EventManager $eventManager = null,
     ) {
         if (null === $config) {
             $config = new Configuration();
-            $config->setProxyDir(__DIR__.'/Proxies');
-            $config->setProxyNamespace('Doctrine\Tests\Proxies');
             $config->setMetadataDriverImpl(new AttributeDriver([]));
+
+            // @phpstan-ignore-next-line always true on ORM >= 3.5, always false on ORM 2
+            if (method_exists($config, 'enableNativeLazyObjects')) {
+                $config->enableNativeLazyObjects(true);
+            } else {
+                $config->setProxyDir(__DIR__.'/Proxies');
+                $config->setProxyNamespace('Doctrine\Tests\Proxies');
+            }
         }
 
-        parent::__construct(new EntityManager($conn, $config));
+        parent::__construct(new EntityManager($conn, $config, $eventManager ?? new EventManager()));
     }
 
     public function getUnitOfWork(): UnitOfWork

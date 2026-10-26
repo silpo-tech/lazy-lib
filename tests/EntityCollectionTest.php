@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LazyLib\Tests;
 
-use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Result;
@@ -29,10 +28,6 @@ class EntityCollectionTest extends TestCase
         $connection = $this->createStub(Connection::class);
         $connection->method('getDatabasePlatform')
             ->willReturn($platform)
-        ;
-
-        $connection->method('getEventManager')
-            ->willReturn(new EventManager())
         ;
 
         $connection->method('executeQuery')
